@@ -1,15 +1,16 @@
 function readstring(filename)
     input = rstrip(read(filename, String))
-    @assert !isempty(input) "Fiile Empty"
+    @assert !isempty(input) "File Empty"
     return input
 end
 
 function parseinput(input)
     lines = split(input, "\n")
+    re = r"^(\d+)-(\d+),(\d+)-(\d+)$"
     function line2ints(line)
-        sp = split(line, ",")
-        nums = map(ivl -> map(n -> parse(Int, n), split(ivl, "-")), sp)
-        return (nums[1][1], nums[1][2]), (nums[2][1], nums[2][2])
+        m = match(re, line)
+        m = map(n -> parse(Int, n), match(re, line).captures)
+        return (m[1], m[2]), (m[3], m[4])
     end
     ints = map(line2ints, lines)
     return ints

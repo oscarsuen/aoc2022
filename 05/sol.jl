@@ -1,6 +1,6 @@
 function readstring(filename)
     input = rstrip(read(filename, String))
-    @assert !isempty(input) "Fiile Empty"
+    @assert !isempty(input) "File Empty"
     return input
 end
 
